@@ -1,4 +1,4 @@
-backups
-env
-db
+backups/**
+env/**
+db/**
 tmp
