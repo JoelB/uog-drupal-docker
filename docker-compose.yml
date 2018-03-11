@@ -7,10 +7,10 @@ services:
     network_mode: bridge
     restart: always
     volumes:
-      - ../db/init:/docker-entrypoint-initdb.d
+      - ./db/init:/docker-entrypoint-initdb.d
     env_file:
       - mysql.env
-      - ../env/mysql.override.env
+      - ./env/mysql.override.env
 
   web:
     image: joelb/uog-drupal7
@@ -22,8 +22,8 @@ services:
 #      - "80:80"
     restart: always
     volumes:
-      - ../backups:/restore
+      - ./backups:/restore
     env_file:
       - drupal.env
-      - ../env/drupal.override.env
+      - ./env/drupal.override.env
 
