@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:5
+    container_name: uog-drupal-mysql
+    network_mode: bridge
+    restart: always
+    volumes:
+      - ../db/init:/docker-entrypoint-initdb.d
+    env_file:
+      - mysql.env
+      - ../env/mysql.override.env
+
+  web:
+    image: joelb/uog-drupal7
+    container_name: uog-drupal-web
+    network_mode: bridge
+    links:
+      - mysql
+#    ports:
+#      - "80:80"
+    restart: always
+    volumes:
+      - ../backups:/restore
+    env_file:
+      - drupal.env
+      - ../env/drupal.override.env
+

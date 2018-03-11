@@ -1,1 +1,0 @@
-# uog-drupal-docker
