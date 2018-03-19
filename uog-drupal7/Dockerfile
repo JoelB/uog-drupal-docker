@@ -6,7 +6,18 @@ ENTRYPOINT ["/docker-entrypoint.sh","apache2-foreground"]
 
 RUN set -ex; \
   apt-get update; \
-  apt-get install -y --no-install-recommends git; \
+  apt-get install -y --no-install-recommends git;
+
+# Set up self-signed SSL
+RUN set -ex; \
+  apt-get install -y ssl-cert; \
+  make-ssl-cert generate-default-snakeoil --force-overwrite; \
+  a2enmod ssl; \
+  a2ensite default-ssl; \
+  service apache2 restart
+
+# Add the php LDAP extension and then clean up the dependencies
+RUN set -ex; \
   savedAptMark="$(apt-mark showmanual)"; \
   apt-get install -y --no-install-recommends libldap2-dev; \
   docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu; \
