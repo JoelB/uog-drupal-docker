@@ -14,7 +14,7 @@ services:
       - ./env/mysql.override.env
 
   web:
-    image: joelb/uog-drupal7
+    image: joelbest/uog-drupal7
     container_name: uog-drupal-web
     network_mode: bridge
     links:
