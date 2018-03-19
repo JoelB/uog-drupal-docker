@@ -8,6 +8,7 @@ services:
     restart: always
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
+      - ./db/data:/var/lib/mysql
     env_file:
       - mysql.env
       - ./env/mysql.override.env
