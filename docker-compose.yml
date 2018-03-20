@@ -24,6 +24,8 @@ services:
     restart: always
     volumes:
       - ./backups:/restore
+      - ./files/public:/var/www/html/sites/default/files/public
+      - ./files/private:/var/www/html/sites/default/files/private
     env_file:
       - drupal.env
       - ./env/drupal.override.env
